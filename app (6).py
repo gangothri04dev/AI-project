@@ -594,58 +594,6 @@ else:
             else:
                 st.info("Pie charts require both categorical and numeric columns.")
         
-        # Portfolio Optimization
-        st.header("Portfolio Optimization")
-        if st.session_state.numeric_columns and len(st.session_state.numeric_columns) >= 2:
-            portfolio_metrics = calculate_portfolio_metrics(st.session_state.filtered_data, st.session_state.numeric_columns)
-            
-            if portfolio_metrics:
-                optimization = optimize_portfolio(portfolio_metrics)
-                
-                if 'weights' in optimization:
-                    st.subheader("Suggested Portfolio Allocation")
-                    
-                    # Display weights
-                    weights_df = pd.DataFrame([
-                        {'Asset': col, 'Recommended Weight (%)': f"{weight:.1f}%"}
-                        for col, weight in optimization['weights'].items()
-                    ])
-                    st.dataframe(weights_df, use_container_width=True)
-                    
-                    # Display metrics
-                    st.subheader("Asset Performance Metrics")
-                    metrics_data = []
-                    for col, metrics_val in portfolio_metrics.items():
-                        metrics_data.append({
-                            'Asset': col,
-                            'Avg Return': f"{metrics_val['return']*100:.2f}%",
-                            'Volatility': f"{metrics_val['volatility']*100:.2f}%",
-                            'Sharpe Ratio': f"{metrics_val['sharpe_ratio']:.2f}",
-                            'Current Value': f"{metrics_val['current_value']:,.2f}"
-                        })
-                    metrics_df = pd.DataFrame(metrics_data)
-                    st.dataframe(metrics_df, use_container_width=True)
-                    
-                    # Display recommendations
-                    recommendations = generate_recommendations(portfolio_metrics, optimization['weights'])
-                    
-                    if recommendations:
-                        st.subheader("Portfolio Recommendations")
-                        for i, rec in enumerate(recommendations, 1):
-                            with st.container(border=True):
-                                if rec['type'] == 'top_performer':
-                                    st.success(f"✓ {rec['reason']}")
-                                    st.write(f"**Action**: {rec['action']}")
-                                elif rec['type'] == 'caution':
-                                    st.warning(f"⚠ {rec['reason']}")
-                                    st.write(f"**Action**: {rec['action']}")
-                                else:
-                                    st.info(f"ℹ {rec['reason']}")
-                                    st.write(f"**Action**: {rec['action']}")
-            else:
-                st.info("Could not calculate portfolio metrics. Check your numeric data.")
-        else:
-            st.info("Portfolio optimization requires at least 2 numeric columns (assets).")
         
         # AI Predictions
         st.header("AI-Powered Predictions")
