@@ -460,17 +460,17 @@ else:
 
     # Main content area
     if st.session_state.filtered_data is not None:
+        if st.session_state.user_info['username'] == "gangothri9":
+            st.header("Project Database Viewer")
 
-        st.header("Project Database Viewer")
-
-        if st.button("Show Users Database"):
-            try:
-                conn = sqlite3.connect("users.db")  # change if your DB name is different
-                df = pd.read_sql_query("SELECT * FROM users", conn)
-                st.dataframe(df)
-                conn.close()
-            except Exception as e:
-                st.error(f"Database error: {str(e)}")
+            if st.button("Show Users Database"):
+                try:
+                    conn = sqlite3.connect("users.db")  # change if your DB name is different
+                    df = pd.read_sql_query("SELECT * FROM users", conn)
+                    st.dataframe(df)
+                    conn.close()
+                except Exception as e:
+                    st.error(f"Database error: {str(e)}")
 
         st.header("Data Overview")
         with st.expander("Data Preview"):
