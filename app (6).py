@@ -461,9 +461,9 @@ else:
     # Main content area
     if st.session_state.filtered_data is not None:
 
-       st.header("Project Database Viewer")
+        st.header("Project Database Viewer")
 
-       if st.button("Show Users Database"):
+        if st.button("Show Users Database"):
             try:
                 conn = sqlite3.connect("users.db")  # change if your DB name is different
                 df = pd.read_sql_query("SELECT * FROM users", conn)
