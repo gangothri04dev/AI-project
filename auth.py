@@ -4,7 +4,6 @@ import os
 import json
 import pandas as pd
 import resend
-
 DB_PATH = "users.db"
 # Use a default from address for Resend unless specified
 RESEND_FROM_EMAIL = "onboarding@resend.dev"
