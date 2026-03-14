@@ -464,13 +464,13 @@ else:
        st.header("Project Database Viewer")
 
        if st.button("Show Users Database"):
-       try:
-            conn = sqlite3.connect("users.db")  # change if your DB name is different
-            df = pd.read_sql_query("SELECT * FROM users", conn)
-            st.dataframe(df)
-            conn.close()
-        except Exception as e:
-            st.error(f"Database error: {str(e)}")
+            try:
+                conn = sqlite3.connect("users.db")  # change if your DB name is different
+                df = pd.read_sql_query("SELECT * FROM users", conn)
+                st.dataframe(df)
+                conn.close()
+            except Exception as e:
+                st.error(f"Database error: {str(e)}")
 
         st.header("Data Overview")
         with st.expander("Data Preview"):
