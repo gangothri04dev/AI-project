@@ -11,7 +11,7 @@ from visualization import create_line_chart, create_bar_chart, create_pie_chart
 from ai_predictions import predict_future_values
 from portfolio_optimizer import calculate_portfolio_metrics, optimize_portfolio, generate_recommendations
 from auth import register_user, login_user, get_user_data, save_analysis, get_user_analysis_history, get_analysis_by_id
-
+import sqlite3
 # Set page configuration
 st.set_page_config(
     page_title="An AI That Converts Chaos into Clarity",
